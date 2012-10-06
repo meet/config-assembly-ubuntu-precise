@@ -1,0 +1,20 @@
+include "/etc/bind/rndc.key";
+
+controls {
+	inet 127.0.0.1 port 953
+	allow { 127.0.0.1; } keys { "rndc-key"; };
+};
+
+include "/etc/bind/meet-lab.key";
+
+zone "meet" {
+	type master;
+	file "/var/lib/bind/db.meet";
+	allow-update { key meet-lab-key; };
+};
+
+zone "30.168.192.in-addr.arpa" {
+	type master;
+	file "/var/lib/bind/db.192.168.30";
+	allow-update { key meet-lab-key; };
+};
