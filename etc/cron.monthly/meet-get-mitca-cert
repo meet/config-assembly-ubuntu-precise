@@ -1,0 +1,3 @@
+#!/bin/sh
+
+( cd /etc/ssl/certs && wget -q https://ca.mit.edu/mitca.crt )
