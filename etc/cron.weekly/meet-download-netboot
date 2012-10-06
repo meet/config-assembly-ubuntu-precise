@@ -1,0 +1,5 @@
+#!/bin/sh
+
+NETBOOT=http://archive.ubuntu.com/ubuntu/dists/precise/main/installer-i386/current/images/netboot/netboot.tar.gz
+
+( cd /var/lib/tftpboot && wget -q -O - $NETBOOT | tar zx ./ubuntu-installer )
