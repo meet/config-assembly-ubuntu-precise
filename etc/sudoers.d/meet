@@ -1,0 +1,2 @@
+Defaults	mail_always
+%lab-admins	ALL= ALL
