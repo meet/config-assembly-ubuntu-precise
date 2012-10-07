@@ -1,0 +1,24 @@
+olcSuffix: dc=meet,dc=mit,dc=edu
+olcSyncrepl: rid=1
+  provider=ldaps://meet.mit.edu
+  searchbase=dc=meet,dc=mit,dc=edu
+  schemachecking=on
+  bindmethod=simple
+  binddn=cn=replicate,dc=meet,dc=mit,dc=edu
+  credentials=%PASSWORD%
+  tls_cacert=/etc/ssl/certs/mitca.crt
+  tls_reqcert=never
+olcAccess: {0}to attrs=userPassword,shadowLastChange
+  by anonymous auth
+  by * none
+olcAccess: {1}to dn.base=""
+  by * read
+olcAccess: {2}to *
+  by users read
+  by peername.ip=127.0.0.1 read
+  by peername.regex=192.168.30..* read
+olcLimits: * size=10000
+olcRootDN: cn=replicate-admin,dc=meet,dc=mit,dc=edu
+olcDbIndex: uid pres,eq,sub
+olcDbIndex: labeledURI,meetAlias,objectClass eq
+olcDbIndex: cn,description,memberUid eq,sub

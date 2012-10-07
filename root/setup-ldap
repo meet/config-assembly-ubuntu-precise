@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#
+# Set up LDAP replication with administrator-supplied credentials.
+# [maxg]
+#
+
+CONN="-Q -Y EXTERNAL -H ldapi:///"
+
+read -p 'LDAP replication password: ' LDAP
+
+# Add MEET schema, fails if already present
+ldapadd $CONN -f /etc/ldap/schema/local-meet.ldif
+
+# Replace configuration
+sed "s/%PASSWORD%/$LDAP/" /etc/ldap/meet-slapd.ldif \
+ | awk -F: '
+   BEGIN { print "dn: olcDatabase={1}hdb,cn=config\nchangetype: modify\ndelete: olcAccess" }
+   $0 ~ "^"attr":|^ " { print $0; next }
+   { attr=$1; print "-\nreplace: "$1"\n"$0 }
+   END { print "-" }' \
+ | ldapmodify $CONN
