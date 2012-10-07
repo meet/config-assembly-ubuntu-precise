@@ -1,0 +1,15 @@
+$ORIGIN .
+meet			IN SOA	assembly.meet. root.assembly.meet. (
+				2012000000 ; serial
+				28800      ; refresh (8 hours)
+				14400      ; retry (4 hours)
+				3600000    ; expire (5 weeks 6 days 16 hours)
+				86400      ; minimum (1 day)
+				)
+			NS	assembly.meet.
+$ORIGIN meet.
+assembly		A	192.168.30.1
+d-i			CNAME	assembly
+ldap			CNAME	assembly
+nfs			CNAME	assembly
+smtp			CNAME	assembly

@@ -1,0 +1,11 @@
+$ORIGIN .
+30.168.192.in-addr.arpa	IN SOA	assembly.meet. root.assembly.meet. (
+				2012000000 ; serial
+				28800      ; refresh (8 hours)
+				14400      ; retry (4 hours)
+				3600000    ; expire (5 weeks 6 days 16 hours)
+				86400      ; minimum (1 day)
+				)
+			NS	assembly.meet.
+$ORIGIN 30.168.192.in-addr.arpa.
+1			PTR	assembly.meet.
