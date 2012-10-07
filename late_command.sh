@@ -1,10 +1,28 @@
 #!/bin/bash
 
+# Configuration files
+REPO=config-fatlab-ubuntu-precise
+( cd / \
+  && git clone --no-checkout https://github.com/meet/$REPO.git \
+  && mv $REPO/.git / \
+  && git checkout --force \
+  && rm -rf $REPO \
+  && git config status.showUntrackedFiles no )
+
+# LDAP authentication
+auth-client-config -t nss -p lac_ldap
+
 # Dynamic DNS
 echo "key meet-lab-key {
   algorithm hmac-md5;
   secret `openssl rand -base64 16`;
 };" | tee /etc/bind/meet-lab.key > /etc/dhcp/meet-lab.key
 
-# LDAP authentication
-auth-client-config -t nss -p lac_ldap
+# DNS zones
+for db in /var/lib/bind/db.*.orig; do cp $db ${db/.orig/}; done
+
+# sudo
+chmod 440 /etc/sudoers.d/*
+
+# Run periodic tasks once
+for cron in /etc/cron.*/meet-*; do $cron; done
