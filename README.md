@@ -24,3 +24,8 @@
    5. And repeat with the line ending in `swap`, except choose "Use as" "swap area"
    6. Now select "Finish partitioning and write changes to disk"
  * At the end of the installation, remove the USB drive and reboot
+
+### Post-Installation Instructions
+ * Immediately log in and change the root password
+ * Run `/root/setup-ldap` and provide the LDAP replication password
+   (after this, `getent passwd` should show MEET users)
