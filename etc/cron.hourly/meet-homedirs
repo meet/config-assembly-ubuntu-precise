@@ -1,0 +1,27 @@
+#!/usr/bin/ruby
+
+#
+# Creates home directories based on users in LDAP.
+# [maxg]
+#
+
+SKEL = '/etc/skel'
+SRV = '/srv'
+GID = `getent group meet`.split(":")[2]
+
+def run(arr)
+  puts "  #{arr.inspect}"
+  system *arr
+end
+
+`getent passwd`.split("\n").each do |passwd|
+  user, pass, uid, gid, name, home, shell = passwd.split(":")
+  next unless gid == GID && home =~ /^\/home\//
+  srvhome = "#{SRV}#{home}"
+  next if FileTest.exist?(srvhome)
+
+  puts "Creating home directory for #{user}"
+  run ['cp', '-R', SKEL, srvhome]
+  run ['chmod', '750', srvhome]
+  run ['chown', '-R', "#{user}:#{GID}", srvhome]
+end
