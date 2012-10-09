@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration files
-REPO=config-fatlab-ubuntu-precise
+REPO=config-assembly-ubuntu-precise
 ( cd / \
   && git clone --no-checkout https://github.com/meet/$REPO.git \
   && mv $REPO/.git / \
