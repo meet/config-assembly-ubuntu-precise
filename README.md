@@ -28,4 +28,4 @@
 ### Post-Installation Instructions
  * Immediately log in and change the root password
  * Run `/root/setup-ldap` and provide the LDAP replication password
-   (after this, `getent passwd` should show MEET users)
+   (after a few seconds, `getent passwd` should show MEET users)
