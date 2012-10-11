@@ -1,6 +1,7 @@
 olcSuffix: dc=meet,dc=mit,dc=edu
 olcSyncrepl: rid=1
   provider=ldaps://meet.mit.edu
+  interval=00:00:15:00
   searchbase=dc=meet,dc=mit,dc=edu
   schemachecking=on
   bindmethod=simple
