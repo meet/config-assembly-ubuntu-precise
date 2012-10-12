@@ -21,6 +21,9 @@ echo "key meet-lab-key {
 # DNS zones
 for db in /var/lib/bind/db.*.orig; do cp $db ${db/.orig/}; done
 
+# Exim mail server
+update-exim4.conf
+
 # Firewall
 ufw allow from 192.168.30.0/24 to 192.168.30.1
 
