@@ -24,4 +24,6 @@ end
   run ['cp', '-R', SKEL, srvhome]
   run ['chmod', '750', srvhome]
   run ['chown', '-R', "#{user}:#{GID}", srvhome]
+  puts "Adding #{user} to default groups."
+  run ['adduser', user, "dialout"]
 end
