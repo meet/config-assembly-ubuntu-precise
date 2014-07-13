@@ -27,6 +27,12 @@ label install
 	kernel ubuntu-installer/i386/linux
 	append vga=788 initrd=ubuntu-installer/i386/initrd.gz -- quiet auto=true url=http://meet.github.com/config-fatlab-ubuntu-precise/preseed.cfg priority=critical
 
+label installlaptop
+	menu label ^Erase & Install - Laptop
+	menu default
+	kernel ubuntu-installer/i386/linux
+	append vga=788 initrd=ubuntu-installer/i386/initrd.gz -- quiet auto=true url=http://meet.github.com/config-laptop-ubuntu-precise/preseed.cfg priority=critical
+
 default ubuntu-installer/i386/boot-screens/vesamenu.c32
 
 prompt 0
